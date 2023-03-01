@@ -1,0 +1,211 @@
+﻿<Window x:Class="Calculator_F.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:models="clr-namespace:Calculator_F.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=models:MainMenu}"
+        mc:Ignorable="d"
+    Title="兽三计算器" Height="450" Width="800" WindowStartupLocation="CenterScreen" Opacity="0.9" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Icon="/Resources/icon.ico">
+
+
+    <Window.Resources>
+
+        <models:MainMenu  x:Key="MainMenu"/>
+
+        <Style x:Key="mainText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="subText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="normalText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="markText" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="ExtraBold"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="textbox" TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Dungeon"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Opacity" Value="0.75"/>
+            <Setter Property="Text" Value="0"/>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+
+        <Grid x:Name="menuUI" Margin="0,0,150,0" Visibility="{Binding MenuUIState}">
+            <Image x:Name="ShimaHai" HorizontalAlignment="Left" Height="450" VerticalAlignment="Center" Width="322" Source="/Resources/ShimaHai.jpg"/>
+            <Label x:Name="version" Content="兽三计算器 Beta Version 1.0" HorizontalAlignment="Left" Margin="0,425,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        </Grid>
+
+        <Grid x:Name="basicUI" Visibility="{Binding BasicUIState}" Margin="0,0,150,0">
+            <Image x:Name="Bg" HorizontalAlignment="Center" Height="494" VerticalAlignment="Top" Width="900" Source="/Resources/Background.png" Opacity="0.2">
+                <Image.Effect>
+                    <DropShadowEffect/>
+                </Image.Effect>
+            </Image>
+            <TextBlock Style="{StaticResource mainText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="65,30,0,0" Margin="0,0,0,221">静态总数值</TextBlock>
+            <Label x:Name="dmgResult" Content="芝士艮瓜=&gt;" HorizontalAlignment="Left" Margin="236,35,0,0" VerticalAlignment="Top" Height="50" Width="283" FontSize="36" FontFamily="Magneto" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+            <Image x:Name="Gin" HorizontalAlignment="Left" Height="100" Margin="550,10,0,0" VerticalAlignment="Top" Width="90" Source="/Resources/Gin.jpg" MouseLeftButtonDown="Gin_MouseLeftButtonDown"/>
+            <TextBox x:Name="indexTotal" Width="120" Height="28" Margin="60,60,478,365" Text="2333" FontSize="20" Style="{StaticResource textbox}"/>
+            <CheckBox x:Name="ifAdvance" FontSize="14" FontWeight="Bold" Margin="180,65,385,365" Click="ifAdvance_Click">高级选项</CheckBox>
+        </Grid>
+
+        <Grid x:Name="advancedUI" Margin="0,250,150,0" Visibility="{Binding AdvancedUIState}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="24"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource mainText}">照片相关</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource mainText}">基础数值</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource subText}">数值加成</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource subText}">倍率加成</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource subText}">数值加成</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="5" Style="{StaticResource subText}">倍率加成</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="2" Style="{StaticResource mainText}"  Text="+       %"/>
+            <TextBlock Grid.Row="5" Grid.Column="2" Style="{StaticResource mainText}"  Text="+       %"/>
+            <TextBlock Grid.Row="3" Grid.Column="5" Style="{StaticResource mainText}"  Text="+       %"/>
+            <TextBlock Grid.Row="4" Grid.Column="5" Style="{StaticResource mainText}"  Text="+       %"/>
+            <TextBlock Grid.Row="5" Grid.Column="5" Style="{StaticResource mainText}"  Text="+       %"/>
+            <TextBlock Grid.Row="6" Grid.Column="5" Style="{StaticResource mainText}"  Text="+       %"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource markText}"  Text=" +"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource markText}"  Text=" +"/>
+            <TextBlock Grid.Row="3" Grid.Column="4" Style="{StaticResource markText}"  Text=" +"/>
+            <TextBlock Grid.Row="4" Grid.Column="4" Style="{StaticResource markText}"  Text=" +"/>
+            <TextBlock Grid.Row="5" Grid.Column="4" Style="{StaticResource markText}"  Text=" +"/>
+            <TextBlock Grid.Row="6" Grid.Column="4" Style="{StaticResource markText}"  Text=" +"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource mainText}"  Text="迷宫相关"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource mainText}"  Text="饰品相关"/>
+
+            <TextBox x:Name="indexBasic" Grid.Row="0" Grid.Column="1" Style="{StaticResource textbox}" Width="80" Text="2333" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="itemBonus2" Grid.Row="3" Grid.Column="1" Style="{StaticResource textbox}"  TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="itemBonus1" Grid.Row="5" Grid.Column="1" Style="{StaticResource textbox}"  TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="itemMulti1" Grid.Row="3" Grid.Column="2" Style="{StaticResource textbox}" Width="40" ToolTip="注意卡色~" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="itemMulti2" Grid.Row="5" Grid.Column="2" Style="{StaticResource textbox}" Width="40" ToolTip="注意卡色~" TextChanged="Refresh_indexTotal"/>
+            <ComboBox x:Name="photoSlot" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" FontWeight="Bold" Opacity="0.8" DropDownClosed="photoSlot_DropDownClosed">
+                <ComboBoxItem Content="1槽" IsSelected="True"/>
+                <ComboBoxItem Content="2槽"/>
+                <ComboBoxItem Content="3槽"/>
+                <ComboBoxItem Content="4槽"/>
+                <ComboBoxItem Content="5槽"/>
+                <ComboBoxItem Content="6槽"/>
+                <ComboBoxItem Content="7槽"/>
+                <ComboBoxItem Content="8槽"/>
+                <ComboBoxItem Content="9槽"/>
+                <ComboBoxItem Content="10槽"/>
+                <ComboBoxItem Content="11槽"/>
+                <ComboBoxItem Content="12槽"/>
+            </ComboBox>
+
+            <TextBox x:Name="photoBonus1" Grid.Row="3" Grid.Column="4" Style="{StaticResource textbox}" Height="20" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoBonus2" Grid.Row="4" Grid.Column="4" Style="{StaticResource textbox}" Height="20" IsEnabled="False" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoBonus3" Grid.Row="5" Grid.Column="4" Style="{StaticResource textbox}" Height="20" IsEnabled="False" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoBonus4" Grid.Row="6" Grid.Column="4" Style="{StaticResource textbox}" Height="20" IsEnabled="False" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoMulti1" Grid.Row="3" Grid.Column="5" Style="{StaticResource textbox}" Width="40" Height="20" ToolTip="注意卡色~" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoMulti2" Grid.Row="4" Grid.Column="5" Style="{StaticResource textbox}" Width="40" Height="20" ToolTip="注意卡色~" IsEnabled="False" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoMulti3" Grid.Row="5" Grid.Column="5" Style="{StaticResource textbox}" Width="40" Height="20" ToolTip="注意卡色~" IsEnabled="False" TextChanged="Refresh_indexTotal"/>
+            <TextBox x:Name="photoMulti4" Grid.Row="6" Grid.Column="5" Style="{StaticResource textbox}" Width="40" Height="20" ToolTip="注意卡色~" IsEnabled="False" TextChanged="Refresh_indexTotal"/>
+        </Grid>
+
+        <Grid x:Name="dmgUI" Margin="0,0,150,0" Visibility="{Binding DmgUIState}">
+            <TextBlock Style="{StaticResource normalText}" Margin="270,174,309,254">行动顺序</TextBlock>
+            <TextBlock Style="{StaticResource normalText}" Margin="240,95,231,332" Text="伤害倍率  ×              %"/>
+            <TextBlock Style="{StaticResource normalText}" Margin="240,136,231,290" Text="兽质加成  +              %"/>
+            <ComboBox x:Name="dmgComboMulti" HorizontalAlignment="Left" Margin="441,175,0,0" VerticalAlignment="Top" Width="95" SelectedIndex="0" FontWeight="Bold" Opacity="0.8" HorizontalContentAlignment="Center">
+                <ComboBoxItem Content="无红卡连携" IsSelected="True"/>
+                <ComboBoxItem Content="红卡2连"/>
+                <ComboBoxItem Content="红卡3连"/>
+                <ComboBoxItem Content="红卡4连"/>
+                <ComboBoxItem Content="红卡5连"/>
+            </ComboBox>
+            <TextBox x:Name="dmgBasicMulti" HorizontalAlignment="Left" Margin="330,94,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="60" Height="24" FontSize="16" FontFamily="Dungeon" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.75" ToolTip="红卡/奇迹"/>
+            <ComboBox x:Name="dmgActMulti" HorizontalAlignment="Left" Margin="341,175,0,0" VerticalAlignment="Top" Width="48" HorizontalContentAlignment="Center" Opacity="0.9">
+                <ComboBoxItem Content="1" IsSelected="True"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+            <TextBox x:Name="dmgPlasmMulti" HorizontalAlignment="Left" Margin="329,135,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="60" Height="24" FontSize="16" FontFamily="Dungeon" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.75" ToolTip=""/>
+            <CheckBox x:Name="dmgIfCaptain" HorizontalAlignment="Left" Margin="441,115,0,0" VerticalAlignment="Top" FontWeight="Bold" Click="dmgIfCaptain_Click">呆啾桑加攻</CheckBox>
+            <TextBox x:Name="dmgCaptainMulti" HorizontalAlignment="Left" Margin="446,135,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="70" Height="24" FontSize="16" FontFamily="Dungeon" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0.8" ToolTip="默认满级~" IsEnabled="False"/>
+        </Grid>
+
+        <Grid x:Name="menu" HorizontalAlignment="Left" Height="450" Margin="650,0,0,0" VerticalAlignment="Center" Width="150">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Bisque"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Button x:Name="dmgBtn" Content="伤害计算" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="60" Width="150" FontWeight="Bold" FontSize="28" BorderThickness="0,0,0,0" Command="{Binding ShowDmgUI}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="CadetBlue"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="exitBtn" HorizontalAlignment="Left" Margin="75,411,0,0" VerticalAlignment="Top" Height="39" Width="75" FontWeight="Bold" FontSize="20" BorderThickness="0,0,0,0" Content="退出" Click="exitBtn_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="RosyBrown"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="ifBtn" Content="更多功能" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="150" FontWeight="Bold" FontSize="28" BorderThickness="0,0,0,0" Command="{Binding ShowMore}">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Goldenrod"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="minimizeBtn" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Height="39" Width="75" FontWeight="Bold" FontSize="20" BorderThickness="0,0,0,0" Content="最小化" Click="minimizeBtn_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Chocolate"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
