@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calculator_F.Views;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,15 +11,18 @@ using System.Windows.Input;
 
 namespace Calculator_F.ViewModels
 {
-    public class MainMenu : NotifyObject
+    public class MenuModel : NotifyObject
     {
-        public MainMenu()
+        public MenuModel()
         {
             ShowMore = new CommandObject(_show);
             ShowDmgUI = new CommandObject(_showDmgUI);
         }
         public CommandObject ShowMore { get; set; }
         public CommandObject ShowDmgUI { get; set; }
+
+        private DmgView dmgView = new DmgView();//实例化用户控件
+
 
 
         private string dmgUIState = "Hidden";
@@ -73,7 +77,18 @@ namespace Calculator_F.ViewModels
         }
         private void _show()
         {
-            MessageBox.Show("敬请期待（？）");
+            UserContent = dmgView;
+        }
+
+        private UserControl content;
+        public UserControl UserContent
+        {
+            get { return content; }
+            set
+            {
+                content = value;
+                Notify(nameof(UserControl));
+            }
         }
     }
 }

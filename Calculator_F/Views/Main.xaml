@@ -4,14 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:models="clr-namespace:Calculator_F.ViewModels" 
-        d:DataContext="{d:DesignInstance Type=models:MainMenu}"
         mc:Ignorable="d"
     Title="兽三计算器" Height="450" Width="800" WindowStartupLocation="CenterScreen" Opacity="0.9" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Icon="/Resources/icon.ico">
 
 
     <Window.Resources>
 
-        <models:MainMenu  x:Key="MainMenu"/>
 
         <Style x:Key="mainText" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="20"/>
@@ -52,23 +50,21 @@
 
 
     <Grid>
-
         <Grid x:Name="menuUI" Margin="0,0,150,0" Visibility="{Binding MenuUIState}">
             <Image x:Name="ShimaHai" HorizontalAlignment="Left" Height="450" VerticalAlignment="Center" Width="322" Source="/Resources/ShimaHai.jpg"/>
             <Label x:Name="version" Content="兽三计算器 Beta Version 1.0" HorizontalAlignment="Left" Margin="0,425,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         </Grid>
-
         <Grid x:Name="basicUI" Visibility="{Binding BasicUIState}" Margin="0,0,150,0">
             <Image x:Name="Bg" HorizontalAlignment="Center" Height="494" VerticalAlignment="Top" Width="900" Source="/Resources/Background.png" Opacity="0.2">
                 <Image.Effect>
                     <DropShadowEffect/>
                 </Image.Effect>
             </Image>
-            <TextBlock Style="{StaticResource mainText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="65,30,0,0" Margin="0,0,0,221">静态总数值</TextBlock>
+            <TextBlock Style="{StaticResource mainText}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="65,30,0,0" Margin="0,0,0,221"><Run Text="静态总数值"/></TextBlock>
             <Label x:Name="dmgResult" Content="芝士艮瓜=&gt;" HorizontalAlignment="Left" Margin="236,35,0,0" VerticalAlignment="Top" Height="50" Width="283" FontSize="36" FontFamily="Magneto" FontWeight="Bold" HorizontalContentAlignment="Right"/>
             <Image x:Name="Gin" HorizontalAlignment="Left" Height="100" Margin="550,10,0,0" VerticalAlignment="Top" Width="90" Source="/Resources/Gin.jpg" MouseLeftButtonDown="Gin_MouseLeftButtonDown"/>
             <TextBox x:Name="indexTotal" Width="120" Height="28" Margin="60,60,478,365" Text="2333" FontSize="20" Style="{StaticResource textbox}"/>
-            <CheckBox x:Name="ifAdvance" FontSize="14" FontWeight="Bold" Margin="180,65,385,365" Click="ifAdvance_Click">高级选项</CheckBox>
+            <CheckBox x:Name="ifAdvance" FontSize="14" FontWeight="Bold" Margin="180,65,385,365" Click="ifAdvance_Click" Content="高级选项"/>
         </Grid>
 
         <Grid x:Name="advancedUI" Margin="0,250,150,0" Visibility="{Binding AdvancedUIState}" >
@@ -207,5 +203,6 @@
                 </Button.Background>
             </Button>
         </Grid>
+
     </Grid>
 </Window>

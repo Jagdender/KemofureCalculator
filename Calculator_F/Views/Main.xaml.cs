@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Media;
 using System.Reflection;
@@ -35,8 +36,11 @@ namespace Calculator_F.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainMenu();
+            DataContext = new MenuModel();
+            
         }
+
+
 
         private void selectAudio(int index)
         {
