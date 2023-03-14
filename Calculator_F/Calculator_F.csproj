@@ -86,7 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\MenuModel.cs" />
+    <Compile Include="ViewModels\DmgVM.cs" />
+    <Compile Include="ViewModels\MainVM.cs" />
     <Page Include="Views\DmgView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

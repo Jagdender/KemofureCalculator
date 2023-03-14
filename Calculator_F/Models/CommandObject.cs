@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Calculator_F
@@ -14,6 +15,7 @@ namespace Calculator_F
         {
             executeAction = action;
         }
+
 
         public event EventHandler CanExecuteChanged;
 
